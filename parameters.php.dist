@@ -1,0 +1,12 @@
+<?php
+
+define('SILEX_ENV', 'dev');
+
+define('DB_DRIVER', 'pdo_mysql');
+define('DB_HOST', '127.0.0.1');
+define('DB_NAME', 'instagram_app');
+define('DB_USER', 'root');
+define('DB_PASS', 'pont');
+
+define('INSTAGRAM_CLIENT_ID', 'REPLACE_WITH_YOUR_INSTAGRAM_CLIENT_ID');
+define('INSTAGRAM_CLIENT_SECRET', 'REPLACE_WITH_YOUR_INSTAGRAM_CLIENT_SECRET');

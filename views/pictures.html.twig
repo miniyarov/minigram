@@ -1,0 +1,33 @@
+{% for picture in pictures %}
+    <div class="col-xs-6 col-md-4">
+        <div class="thumbnail">
+            <a target="_blank" href="{{ picture.instagram_link }}">
+                <img class="" width="200" src="{{ picture.image_url }}" alt="">
+            </a>
+            <div class="caption">
+                <ul class="list-unstyled list-group">
+                    <li>
+                        Posted by: <a target="_blank" href="http://instagram.com/{{ picture.username }}">@{{ picture.username }}</a>
+                    </li>
+                    <li>
+                        Tagged by: <span><a target="_blank" href="http://statigr.am/tag/{{ picture.tag }}/">{{ picture.tag }}</a></span>
+                    </li>
+                    <li>
+                        Status: {{ cycle(['<span style="color:red;">not printed</span>', '<span style="color:green;">printed</span>'], picture.is_printed)|raw }}
+                    </li>
+                    {% if picture.is_printed %}
+                        <li>
+                            Printed at: {{ picture.printed_at }}
+                        </li>
+                    {% endif %}
+                    <li>
+                        Created at: {{ picture.created_at }}
+                    </li>
+                    <li>
+                        <button type="button" data-loading-text="Printing..." data-id="{{ picture.id }}" class="print-now btn btn-sm btn-info">Print now!</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endfor %}

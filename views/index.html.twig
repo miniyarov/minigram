@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="page-header text-info">
+        <h1>
+            <span class="glyphicon glyphicon-print"></span> Minigram <small>print your photos by tagging!</small>
+            <span class="pull-right">
+                <a id="fetch-new-photos" href="#" class="btn btn-xs btn-success"><span id="fetch-new-photos-icon" class="glyphicon glyphicon-refresh"></span> <span id="fetch-new-photos-text">Fetch new photos</span></a>
+            </span>
+        </h1>
+
+    </div>
+
+    <div class="row" id="pictures">
+            {% include 'pictures.html.twig' %}
+    </div>
+
+{% endblock %}
