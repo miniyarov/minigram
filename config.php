@@ -79,6 +79,19 @@ class DbRepository
         return $this->db->fetchAll('SELECT * FROM pictures ORDER BY created_at DESC LIMIT '. (int) $limit);
     }
 
+    public function getPictureById($id)
+    {
+        return $this->db->fetchAssoc('SELECT * FROM pictures WHERE id = ?', array($id));
+    }
+
+    public function updatePicturePrintStatus($id)
+    {
+        $datetime = date('Y-m-d H:i:s');
+        $updated = $this->db->update('pictures', array('is_printed' => 1, 'printed_at' => $datetime), array('id' => $id));
+
+        return $updated > 0 ? $datetime : null;
+    }
+
     public function getActiveTags()
     {
         return $this->db->fetchAll('SELECT * FROM tags WHERE is_active = 1');

@@ -13,18 +13,16 @@
                         Tagged by: <span><a target="_blank" href="http://statigr.am/tag/{{ picture.tag }}/">{{ picture.tag }}</a></span>
                     </li>
                     <li>
-                        Status: {{ cycle(['<span style="color:red;">not printed</span>', '<span style="color:green;">printed</span>'], picture.is_printed)|raw }}
+                        Status: <span id="print-status-{{ picture.id }}">{{ cycle(['<span style="color:red;">not printed</span>', '<span style="color:green;">printed</span>'], picture.is_printed)|raw }}</span>
                     </li>
-                    {% if picture.is_printed %}
-                        <li>
-                            Printed at: {{ picture.printed_at }}
-                        </li>
-                    {% endif %}
+                    <li id="printed-at-li-{{ picture.id }}" {% if not picture.is_printed %}style="display: none;"{% endif %}>
+                        Printed at: <span id="printed-at-span-{{ picture.id }}">{{ picture.printed_at }}</span>
+                    </li>
                     <li>
                         Created at: {{ picture.created_at }}
                     </li>
                     <li>
-                        <button type="button" data-loading-text="Printing..." data-id="{{ picture.id }}" class="print-now btn btn-sm btn-info">Print now!</button>
+                        <button type="button" data-loading-text="Printing..." data-id="{{ picture.id }}" class="print-now {% if not picture.is_printed %}unprinted{% endif %} btn btn-sm btn-info">Print now!</button>
                     </li>
                 </ul>
             </div>

@@ -104,6 +104,35 @@ $app->match('/check', function (\Silex\Application $app, Request $request) {
     ));
 })->bind('check');
 
+$app->match('/print-image', function (\Silex\Application $app, Request $request) {
+    $id = $request->query->get('id');
+
+    $picture = $app['db_repo']->getPictureById($id);
+
+    if (!$picture) {
+        $app->abort(400, 'Picture id is wrong');
+    }
+
+    return $app['twig']->render('print-image.html.twig', array(
+        'picture' => $picture
+    ));
+})->bind('print-image');
+
+$app->match('/print-done', function (\Silex\Application $app, Request $request) {
+    $id = $request->query->get('id');
+
+    if ($printDatetime = $app['db_repo']->updatePicturePrintStatus($id)) {
+        return $app->json(array(
+            'status' => true,
+            'printed_at' => $printDatetime
+        ));
+    }
+
+    return $app->json(array(
+        'status' => false
+    ));
+})->bind('print-done');
+
 function instagram_check_tag_updates(\Silex\Application $app, $tag, $minId = null, $maxId = null) {
     //    https://api.instagram.com/v1/tags/dushanbe/media/recent
     $client = new Client('https://api.instagram.com/v1/tags/{hashtag}/media', array(

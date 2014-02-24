@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Instagram</title>
+</head>
+<body onload="{#setTimeout(function() { window.print() }, 5000);#}">
+    <style media="print">
+        body{margin:0px;padding:0px;-webkit-print-color-adjust:exact;}
+        #cover{width:740px;height:1102px;position:absolute;z-index:3;background:url('{{ asset('assets/photo/cover1.png') }}') no-repeat}
+        #photo{width:640px;height:640px;margin:138px 50px;float:left;z-index:2}
+        .text{margin:840px 0px 0 255px;float:left;width:443px;height:200px}
+        h3, h2{margin:2px;padding:0px;color: darkblue}
+    </style>
+    <div id="cover">
+        <div class="text">
+            <h2>@{{ picture.username }}</h2>
+            {#<h2>"Çok güzeliz, çok eğleniyoruz"</h2>#}
+        </div>
+    </div>
+    <div id="photo">
+        <img src="{{ picture.image_url }}" />
+    </div>
+</body>
+</html>
