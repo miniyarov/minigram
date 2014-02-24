@@ -168,6 +168,7 @@ function instagram_check_tag_updates(\Silex\Application $app, $tag, $minId = nul
 
     $request = $client->get('recent');
     $request->getQuery()->set('client_id', INSTAGRAM_CLIENT_ID);
+    $request->getQuery()->set('count', 100);
 
     if ($minId) {
         $request->getQuery()->set('min_id', $minId);
@@ -211,6 +212,9 @@ function instagram_check_tag_updates(\Silex\Application $app, $tag, $minId = nul
                     'picture_id' => $picture['id'],
                     'user_id' => $picture['user']['id'],
                     'username' => $picture['user']['username'],
+                    'user_fullname' => $picture['user']['full_name'],
+                    'user_profile_picture' => $picture['user']['profile_picture'],
+                    'caption' => $picture['caption']['text'],
                     'image_url' => $picture['images']['standard_resolution']['url'],
                     'instagram_link' => $picture['link'],
                     'tag' => $tag,
