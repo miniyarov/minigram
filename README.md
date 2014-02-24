@@ -1,7 +1,7 @@
 Minigram
 ========
 
-Define hashtags and let the app grab instagram photos for that hashtag and print them for your.
+Define hashtags and let the app grab instagram photos for that hashtag and print them for you.
 
 This app is intented to be used in a stand. Do not use in production.
 
