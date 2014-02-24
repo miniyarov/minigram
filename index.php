@@ -113,6 +113,33 @@ $app->match('/print-image', function (\Silex\Application $app, Request $request)
         $app->abort(400, 'Picture id is wrong');
     }
 
+    $imagine = new \Imagine\Gd\Imagine();
+
+    $imageData = file_get_contents($picture['image_url']);
+
+    if (!$imageData) {
+        $app->abort(400, 'Failed to read image from: '. $picture['image_url']);
+    }
+
+    // x -> 50, y -> 138
+    $image = $imagine->load(file_get_contents($picture['image_url']));
+    $coverpath = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR .
+        'cover' . DIRECTORY_SEPARATOR . 'cover1.png';
+
+    $cover = $imagine->open($coverpath);
+    $coverFix = $imagine->open($coverpath);
+    $cover->paste($image, new \Imagine\Image\Point(50, 138));
+    $cover->paste($coverFix, new \Imagine\Image\Point(0, 0));
+
+    $filepath = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR .
+        'photo' . DIRECTORY_SEPARATOR . $picture['picture_id'] . '.jpg';
+
+    $cover->save($filepath);
+
+//    $data = file_get_contents($filepath);
+//    unlink($filepath);
+//    file_put_contents($filepath, $data);
+
     return $app['twig']->render('print-image.html.twig', array(
         'picture' => $picture
     ));
