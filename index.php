@@ -124,7 +124,7 @@ $app->match('/print-image', function (\Silex\Application $app, Request $request)
     // x -> 50, y -> 138
     $image = $imagine->load(file_get_contents($picture['image_url']));
     $coverpath = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR .
-        'cover' . DIRECTORY_SEPARATOR . 'cover1.png';
+        'cover' . DIRECTORY_SEPARATOR . 'cover'.rand(1,6).'.png';
 
     $cover = $imagine->open($coverpath);
     $coverFix = $imagine->open($coverpath);
